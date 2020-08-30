@@ -1,0 +1,24 @@
+{
+  "name": "problem-for-work",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./tests/**/**.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/byxm/problem-for-work.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/byxm/problem-for-work/issues"
+  },
+  "homepage": "https://github.com/byxm/problem-for-work#readme",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.1.3"
+  }
+}
