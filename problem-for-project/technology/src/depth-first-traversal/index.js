@@ -35,22 +35,24 @@ const obj = {
 
 const traversal = (traversalObj) => {
   const initArr = [];
-  excuteTraversal(traversalObj, initArr);
+  excuteTraversal(traversalObj, initArr, []);
   console.log("initArr", initArr);
 };
 
-const excuteTraversal = (traversalObj, initArr) => {
+const excuteTraversal = (traversalObj, initArr, keyPath) => {
   const keys = Object.keys(traversalObj);
   keys.forEach((k) => {
+    keyPath.push(k);
     if (typeof traversalObj[k] === "object") {
-      excuteTraversal(traversalObj[k], initArr);
-    } 
-    initArr.push(k);
+      excuteTraversal(traversalObj[k], initArr, keyPath);
+      keyPath.pop();
+    }
+    initArr.push(keyPath.join("."));
   });
+
 };
 
-
-traversal(obj)
+traversal(obj);
 
 module.exports = {
   traversal,
