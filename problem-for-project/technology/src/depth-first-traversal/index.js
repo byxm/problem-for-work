@@ -1,59 +1,26 @@
-const obj = {
-  personInfo: {
-    basicInfo: {
-      name: "Simone",
-      age: 22,
-      school: "北京大学",
-    },
-    habbit: "唱跳rap篮球",
-  },
-  geoinfo: {
-    country: {
-      names: {
-        cn: "中国",
-        en: "English",
-      },
-    },
-    province: {
-      names: {
-        cn: "四川",
-        en: "SiChuan",
-      },
-    },
-    city: {
-      names: {
-        cn: "成都",
-        en: "ChengDu",
-      },
-    },
-  },
-  location: {
-    lat: 120.23343423,
-    lon: 34.342344,
-  },
-};
-
-const traversal = (traversalObj) => {
+const deepTraversal = (traversalObj, isIterateArray = false) => {
   const initArr = [];
-  excuteTraversal(traversalObj, initArr, []);
-  console.log("initArr", initArr);
+  excuteTraversal(traversalObj, initArr, [], isIterateArray);
+  return initArr;
 };
 
-const excuteTraversal = (traversalObj, initArr, keyPath) => {
+const excuteTraversal = (traversalObj, initArr, keyPath, isIterateArray) => {
   const keys = Object.keys(traversalObj);
   keys.forEach((k) => {
     keyPath.push(k);
-    if (typeof traversalObj[k] === "object") {
-      excuteTraversal(traversalObj[k], initArr, keyPath);
+    const isIteratorArray = !isIterateArray
+      ? !(traversalObj[k] instanceof Array)
+      : true;
+    if (typeof traversalObj[k] === "object" && isIteratorArray) {
+      excuteTraversal(traversalObj[k], initArr, keyPath, isIterateArray);
+      keyPath.pop();
+    } else {
+      initArr.push(keyPath.join("."));
       keyPath.pop();
     }
-    initArr.push(keyPath.join("."));
   });
-
 };
 
-traversal(obj);
-
 module.exports = {
-  traversal,
+  deepTraversal,
 };
